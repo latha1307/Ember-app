@@ -6,21 +6,28 @@ import { inject as service } from '@ember/service';
 import { runTask, cancelTask } from 'ember-lifeline';
 
 export default class AddEmpComponent extends Component {
-  managers = [
-        { name: 'James' },
-        { name: 'Jonathan' },
-        { name: 'Ruth'},
-        { name: 'Tina' },
-        { name: 'Eric' },
-      ];
-  @tracked selectedManager = null;
   @service router;
+
+  managers = [
+    { name: 'James' },
+    { name: 'Jonathan' },
+    { name: 'Ruth' },
+    { name: 'Tina' },
+    { name: 'Eric' },
+  ];
+
+  @tracked selectedManager = null;
+
   @tracked name = '';
   @tracked empId = '';
   @tracked designation = '';
   @tracked dob = '';
   @tracked doj = '';
-  @tracked manager = '';
+
+  @action prevent(e) {
+    return e.stopImmediatePropagation();
+  }
+
 
   @action setName(e) {
     this.name = e.target.value;
@@ -42,8 +49,7 @@ export default class AddEmpComponent extends Component {
     this.doj = e.target.value;
   }
 
-  @action
-  open(dropdown) {
+  @action open(dropdown) {
     if (this.closeTimer) {
       cancelTask(this, this.closeTimer);
       this.closeTimer = null;
@@ -52,59 +58,47 @@ export default class AddEmpComponent extends Component {
     }
   }
 
-  @action
-  closeLater(dropdown) {
+  @action closeLater(dropdown) {
     this.closeTimer = runTask(
       this,
       () => {
         this.closeTimer = null;
         dropdown.actions.close();
       },
-      200,
+      200
     );
   }
 
-  @action
-  selectManager(manager) {
+  @action selectManager(manager) {
     this.selectedManager = manager;
-  }
-
-  @action setManager(e) {
-    this.manager = e.target.value;
   }
 
   @action addEmployee(e) {
     e.preventDefault();
 
-      empDetails.push(
-        {
-          name: this.name,
-          empId: this.empId,
-          designation: this.designation,
-          dob: this.dob,
-          doj: this.doj,
-          manager: this.manager,
-          selected: false,
-        },
-      );
-    console.log(empDetails)
+    empDetails.push({
+      name: this.name,
+      empId: this.empId,
+      designation: this.designation,
+      dob: this.dob,
+      doj: this.doj,
+      manager: this.selectedManager?.name || 'Not Assigned',
+      selected: false,
+    });
 
-    this.router.transitionTo('')
+    console.log(empDetails);
+
+    this.router.transitionTo('');
 
     this.name = '';
     this.empId = '';
     this.designation = '';
     this.dob = '';
     this.doj = '';
-    this.manager = '';
+    this.selectedManager = null;
   }
 
-  @action Back(){
-    this.router.transitionTo('')
+  @action Back() {
+    this.router.transitionTo('');
   }
 }
-
-
-
-
-
