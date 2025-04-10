@@ -14,4 +14,53 @@
   width: 500px;
 }
 
+  .trigger-bootstrap-feel {
+    padding: 4px 6px;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    right: 0;
+    width: 51%;
+    font-weight: 400;
+    font-size: 16px;
+    display: inline-block;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    outline: none;
+  }
+
+  .trigger-bootstrap-feel:hover {
+    background-color: #dfdfdf;
+    right: 0;
+  }
+
+  .content-bootstrap-feel {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 17.5%;
+    margin-left: 6px;
+  }
+
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.drop-field{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 

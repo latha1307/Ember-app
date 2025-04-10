@@ -35,15 +35,42 @@
         <option value="Ruth" selected={{eq this.manager "Ruth"}}>Ruth</option>
       </select>
     </div>
+
+  <div class="dialog-elem">
+    <label class="manager-label">Manager:</label>
+
+        <BasicDropdown as |dd|>   
+        <dd.Trigger
+        class="trigger-bootstrap-feel"
+        {{on 'mousedown' this.prevent}}
+        {{on 'mouseenter' (fn this.open dd)}}
+        {{on 'mouseleave' (fn this.closeLater dd)}}
+        >
+        <div class="drop-field">
+            {{if this.selectedManager this.selectedManager.name "Select Manager"}} 
+            <span class="material-icons"> keyboard_arrow_down </span>
+        </div>
+        </dd.Trigger>
+    <dd.Content
+      class="content-bootstrap-feel"
+      {{on 'mouseenter' (fn this.open dd)}}
+      {{on 'mouseleave' (fn this.closeLater dd)}}
+    >
+      {{#each this.managers as |manager|}}
+        <p class="dropdown-item" {{on "click" (fn this.selectManager manager)}}>
+          {{manager.name}}
+        </p>
+      {{/each}}
+    </dd.Content>
+  </BasicDropdown>
+
+
+    </div>
     <div class="btns">
       <button type="submit">Add</button>
       <button type="button">Cancel</button>
     </div>
   </form>
 
-  {{!-- <BasicDropdown as |dd|>
-  <dd.Trigger>Click me</dd.Trigger>
-  <dd.Content>Hello world</dd.Content>
-</BasicDropdown> --}}
 </div>
 </div>

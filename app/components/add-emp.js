@@ -2,9 +2,18 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { empDetails } from '../data/employeeData';
-import { inject as service } from '@ember/service'
+import { inject as service } from '@ember/service';
+import { runTask, cancelTask } from 'ember-lifeline';
 
 export default class AddEmpComponent extends Component {
+  managers = [
+        { name: 'James' },
+        { name: 'Jonathan' },
+        { name: 'Ruth'},
+        { name: 'Tina' },
+        { name: 'Eric' },
+      ];
+  @tracked selectedManager = null;
   @service router;
   @tracked name = '';
   @tracked empId = '';
@@ -31,6 +40,33 @@ export default class AddEmpComponent extends Component {
 
   @action setDoj(e) {
     this.doj = e.target.value;
+  }
+
+  @action
+  open(dropdown) {
+    if (this.closeTimer) {
+      cancelTask(this, this.closeTimer);
+      this.closeTimer = null;
+    } else {
+      dropdown.actions.open();
+    }
+  }
+
+  @action
+  closeLater(dropdown) {
+    this.closeTimer = runTask(
+      this,
+      () => {
+        this.closeTimer = null;
+        dropdown.actions.close();
+      },
+      200,
+    );
+  }
+
+  @action
+  selectManager(manager) {
+    this.selectedManager = manager;
   }
 
   @action setManager(e) {

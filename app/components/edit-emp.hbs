@@ -26,14 +26,38 @@
       <input type="date" value={{this.doj}} {{on "input" this.setDoj}} />
     </div>
     <div class="dialog-elem">
-      <label>Manager:</label>
-      <select {{on "change" this.setManager}}>
-        <option value="" selected={{eq this.manager ""}}>-----</option>
-        <option value="James" selected={{eq this.manager "James"}}>James</option>
-        <option value="Tina" selected={{eq this.manager "Tina"}}>Tina</option>
-        <option value="Ruth" selected={{eq this.manager "Ruth"}}>Ruth</option>
-      </select>
+    <label class="manager-label">Manager:</label>
+
+        <BasicDropdown as |dd|>   
+        <dd.Trigger
+        class="trigger-bootstrap-feel"
+        {{on 'mousedown' this.prevent}}
+        {{on 'mouseenter' (fn this.open dd)}}
+        {{on 'mouseleave' (fn this.closeLater dd)}}
+        >
+        <div class="drop-field">
+            {{if this.selectedManager this.selectedManager.name "Select Manager"}} 
+            <span class="material-icons"> keyboard_arrow_down </span>
+        </div>
+        </dd.Trigger>
+    <dd.Content
+      class="content-bootstrap-feel"
+      {{on 'mouseenter' (fn this.open dd)}}
+      {{on 'mouseleave' (fn this.closeLater dd)}}
+    >
+      {{#each this.managers as |manager|}}
+        <p class="dropdown-item" {{on "click" (fn this.selectManager manager)}}>
+          {{manager.name}}
+        </p>
+      {{/each}}
+    </dd.Content>
+  </BasicDropdown>
+
+
     </div>
+
+
+
     <div class="btns">
       <button type="submit">Update</button>
       <button type="button">Cancel</button>

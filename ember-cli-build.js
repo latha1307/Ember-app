@@ -2,6 +2,7 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
     symlinkNodeModules: false,
@@ -11,6 +12,9 @@ module.exports = function (defaults) {
       }
     }
   });
+
+app.import('node_modules/ember-basic-dropdown/dist/ember-basic-dropdown.css');
+
 
   return app.toTree();
 };
