@@ -1,0 +1,57 @@
+  <h1 class="header">Employee Details</h1>
+
+  <div class="buttons-container">
+    <div class="btn-group">
+      <div class="initBtns">
+        <LinkTo @route="addEmp">
+        <button class="add" type="button">
+          <span class="plus">&#43;</span> Add Employee
+        </button>
+        </LinkTo>
+        <div>
+          <button class="delete" type="button" {{on "click" this.deleteEmployees}}>
+          <i class="material-icons" style="font-size:18px;color:white">delete</i> Delete Employee
+        </button>
+        </div>
+      </div>
+
+      <div class="search-container">
+        <input type="search" id="search" placeholder="Search..." {{on "input" this.updateSearch}} />
+        <span class="material-icons">search</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr class="emp-details">
+          <th>S.No</th>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Designation</th>
+          <th>DOB</th>
+          <th>Date Of Joining</th>
+          <th>Manager</th>
+          <th>Actions</th>
+          <th><input type="checkbox" {{on "change" this.selectAll}}> Select All</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.filteredEmployees as |emp index|}}
+          <tr>
+            <td>{{inc index}}</td>
+            <td>{{emp.empId}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.designation}}</td>
+            <td>{{emp.dob}}</td>
+            <td>{{emp.doj}}</td>
+            <td>{{emp.manager}}</td>
+            <td><LinkTo @route="editEmp" @model={{emp.empId}} ><span class="material-icons editBtn" >edit</span></LinkTo></td>
+            <td><input type="checkbox" checked={{if emp.selected "checked" ""}}  {{on "click" (fn this.toggleSelect emp)}} /></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,7 @@
+@import url("./_employees.css");
+@import url("./_actions.css");
+
+* {
+  margin: 0;
+  padding: 0;
+}

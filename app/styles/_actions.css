@@ -1,0 +1,17 @@
+.main-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(227, 227, 227);
+}
+
+.card-container{
+  background-color: white;
+  padding: 40px;
+  box-shadow: 1px 1px 15px 6px rgba(54, 54, 54, 0.1);
+  border-radius: 20px;
+  width: 500px;
+}
+
+

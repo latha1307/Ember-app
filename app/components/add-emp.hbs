@@ -1,0 +1,49 @@
+<div class="main-container">
+  <div class="card-container">
+  <div class="dialog-head">
+    <div {{on 'click' this.Back}}><span class="material-icons"> arrow_back</span></div>
+    <h2>Add New Employee Details</h2>
+
+  </div>
+  <form {{on "submit" this.addEmployee}}>
+    <div class="dialog-elem">
+      <label>Employee Name:</label>
+      <input type="text" value={{this.name}} {{on "input" this.setName}} />
+    </div>
+    <div class="dialog-elem">
+      <label>Employee ID:</label>
+      <input type="text" value={{this.empId}} {{on "input" this.setEmpId}} />
+    </div>
+    <div class="dialog-elem">
+      <label>Designation:</label>
+      <input type="text" value={{this.designation}} {{on "input" this.setDesignation}} />
+    </div>
+    <div class="dialog-elem">
+      <label>DOB:</label>
+      <input type="date" value={{this.dob}} {{on "input" this.setDob}} />
+    </div>
+    <div class="dialog-elem">
+      <label>Date Of Joining:</label>
+      <input type="date" value={{this.doj}} {{on "input" this.setDoj}} />
+    </div>
+    <div class="dialog-elem">
+      <label>Manager:</label>
+      <select {{on "change" this.setManager}}>
+        <option value="" selected={{eq this.manager ""}}>-----</option>
+        <option value="James" selected={{eq this.manager "James"}}>James</option>
+        <option value="Tina" selected={{eq this.manager "Tina"}}>Tina</option>
+        <option value="Ruth" selected={{eq this.manager "Ruth"}}>Ruth</option>
+      </select>
+    </div>
+    <div class="btns">
+      <button type="submit">Add</button>
+      <button type="button">Cancel</button>
+    </div>
+  </form>
+
+  {{!-- <BasicDropdown as |dd|>
+  <dd.Trigger>Click me</dd.Trigger>
+  <dd.Content>Hello world</dd.Content>
+</BasicDropdown> --}}
+</div>
+</div>
