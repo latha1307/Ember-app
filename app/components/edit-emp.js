@@ -129,12 +129,12 @@ export default class EditEmpComponent extends Component {
 
   @action
   triggerDobPicker() {
-    this.showCalendar = !this.showCalendar;
+    this.showCalendar = true;
   }
 
   @action
   triggerDojPicker() {
-    this.showDojCalendar = !this.showDojCalendar;
+    this.showDojCalendar = true;
   }
 
   @action
@@ -219,6 +219,16 @@ export default class EditEmpComponent extends Component {
       type: 'custom-success', 
     });
 
+  }
+
+  @action 
+  closeCalendar() {
+    if(this.showCalendar) {
+      this.showCalendar = false;
+    }
+    if(this.showDojCalendar) {
+      this.showDojCalendar = false;
+    }
   }
 
 

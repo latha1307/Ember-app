@@ -5,7 +5,7 @@
     <h2>Add New Employee Details</h2>
 
   </div>
-  <form {{on "submit" this.addEmployee}}>
+  <form {{on "submit" this.addEmployee}} {{on-click-outside this.closeCalendars}}>
     <div class="dialog-elem">
       <label>Employee Name:</label>
       <input type="text" value={{this.name}} {{on "input" this.setName}} />
@@ -54,7 +54,7 @@
 
 <div class="dialog-elem">
   <label>Date Of Joining:</label>
-  <div class="dob-custom">
+  <div class="dob-custom" >
     <input
       type="text"
       class="form-control"

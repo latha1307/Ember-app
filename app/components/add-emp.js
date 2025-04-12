@@ -109,12 +109,12 @@ export default class AddEmpComponent extends Component {
 
   @action
   triggerDobPicker() {
-    this.showCalendar = !this.showCalendar;
+    this.showCalendar = true;
   }
 
   @action
   triggerDojPicker() {
-    this.showDojCalendar = !this.showDojCalendar;
+    this.showDojCalendar = true;
   }
 
   @action
@@ -162,6 +162,17 @@ export default class AddEmpComponent extends Component {
       dropdown.actions.open();
     }
   }
+
+  @action
+  closeCalendars() {
+    if (this.showCalendar) {
+      this.showCalendar = false;
+    }
+    if (this.showDojCalendar) {
+      this.showDojCalendar = false;
+    }
+  }
+  
 
   @action closeLater(dropdown) {
     this.closeTimer = runTask(

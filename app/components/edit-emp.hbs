@@ -4,7 +4,7 @@
     <div {{on 'click' this.Back}}><span class="material-icons"> arrow_back</span></div>
     <h2>Update Employee Details</h2>
   </div>
-  <form {{on "submit" this.EditEmployee}}>
+  <form {{on "submit" this.EditEmployee}} {{on-click-outside this.closeCalendar}}>
     <div class="dialog-elem">
       <label>Employee Name:</label>
       <input type="text" value={{this.name}} {{on "input" this.setName}} />
