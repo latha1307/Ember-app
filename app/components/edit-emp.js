@@ -15,6 +15,7 @@ export default class EditEmpComponent extends Component {
       { name: 'Tina' },
       { name: 'Eric' },
     ];
+  @tracked updateLoading = false;
   @tracked selectedManager = null;
   @tracked selectedDate = null;
   @tracked selectedDojDate = null;
@@ -232,20 +233,25 @@ export default class EditEmpComponent extends Component {
   }
 
 
-  @action EditEmployee(e) {
+  @action 
+  async EditEmployee(e) {
     e.preventDefault();
+    this.updateLoading = true;
 
-    this.editingEmp.name = this.name;
+    await new Promise((resolve) => {
+      setTimeout(() => {
+      this.editingEmp.name = this.name;
     this.editingEmp.empId = this.empId;
     this.editingEmp.designation = this.designation;
     this.editingEmp.dob = this.dob;
     this.editingEmp.doj = this.doj;
     this.editingEmp.manager = this.selectedManager?.name || this.manager;
-
+    this.updateLoading = false;
+    }, 2000)
     this.showCustomFlash()
     this.Back();
-
-  }
+  });
+}
 
   @action
   Back() {

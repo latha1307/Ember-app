@@ -116,7 +116,13 @@
 
 
     <div class="btns">
-      <button type="submit">Update</button>
+      <button type="submit" disabled={{this.updateLoading}}>
+        {{#if this.updateLoading}}
+          Updating...
+        {{else}}
+          Update
+        {{/if}}
+        </button>
       <button type="button" {{on 'click' this.Back}}>Cancel</button>
     </div>
   </form>

@@ -115,7 +115,13 @@
 
     </div>
     <div class="btns">
-      <button type="submit">Add</button>
+      <button type="submit" disabled={{this.addLoading}}>
+        {{#if this.addLoading}}
+          Adding
+        {{else}}
+          Add
+        {{/if}}
+      </button>
       <button type="button" {{on 'click' this.Back}}>Cancel</button>
     </div>
   </form>

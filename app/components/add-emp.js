@@ -19,7 +19,7 @@ export default class AddEmpComponent extends Component {
   ];
 
   @tracked selectedManager = null;
-
+  @tracked addLoading = false;
   @tracked name = '';
   @tracked empId = '';
   @tracked designation = '';
@@ -200,21 +200,28 @@ export default class AddEmpComponent extends Component {
 
   }
 
-  @action addEmployee(e) {
+  @action 
+  async addEmployee(e) {
     e.preventDefault();
-    empDetails.push({
-      name: this.name,
-      empId: this.empId,
-      designation: this.designation,
-      dob: this.dob,
-      doj: this.doj,
-      manager: this.selectedManager?.name || 'Not Assigned',
-      selected: false,
-    });
-
-
-    this.showCustomFlash()
-    this.Back();
+    this.addLoading = true;
+    
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        empDetails.push({
+          name: this.name,
+          empId: this.empId,
+          designation: this.designation,
+          dob: this.dob,
+          doj: this.doj,
+          manager: this.selectedManager?.name || 'Not Assigned',
+          selected: false,
+        }
+      );
+      this.addLoading = false;
+      },2000);
+      this.showCustomFlash()
+      this.Back();
+    })
 
 
   }
