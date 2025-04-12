@@ -121,4 +121,18 @@
     </div>
   </form>
 </div>
+
+{{#each this.flashMessages.queue as |flash|}}
+  <FlashMessage @flash={{flash}} as |component flash|>
+    {{#if component.showProgressBar}}
+      <div class="alert-progress">
+        <h3 style="margin-left: 10px;color:green;">{{component.flashType}}</h3>
+        <p style="margin-left: 10px;">{{flash.message}}</p>
+        <div class="alert-progressBar" style="{{component.progressDuration}}">
+          
+        </div>
+      </div>
+    {{/if}}
+  </FlashMessage>
+{{/each}}
 </div>

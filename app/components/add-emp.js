@@ -8,6 +8,7 @@ import { DateTime } from 'luxon';
 
 export default class AddEmpComponent extends Component {
   @service router;
+  @service flashMessages;
 
   managers = [
     { name: 'James' },
@@ -91,6 +92,7 @@ export default class AddEmpComponent extends Component {
       this.cal.actions.changeCenter(newCenter);  
     }
   }
+  
   
 
   @action
@@ -176,6 +178,17 @@ export default class AddEmpComponent extends Component {
     this.selectedManager = manager;
   }
 
+  @action
+  showCustomFlash() {
+    this.flashMessages.success('Employee details added successfully!', {
+      timeout: 3000,
+      sticky: false,
+      showProgress: true,
+      type: 'custom-success', 
+    });
+
+  }
+
   @action addEmployee(e) {
     e.preventDefault();
     empDetails.push({
@@ -189,17 +202,28 @@ export default class AddEmpComponent extends Component {
     });
 
 
-    this.router.transitionTo('');
+    this.showCustomFlash()
+    this.Back();
 
-    this.name = '';
-    this.empId = '';
-    this.designation = '';
-    this.dob = '';
-    this.doj = '';
-    this.selectedManager = null;
+
   }
 
-  @action Back() {
-    this.router.transitionTo('');
+  @action
+  Back() {
+    setTimeout(() => {
+      this.router.transitionTo('');
+    }, 3000); 
+  }
+  
+  @action
+  resetForm() {
+    setTimeout(() => {
+      this.name = '';
+      this.empId = '';
+      this.designation = '';
+      this.dob = '';
+      this.doj = '';
+      this.selectedManager = null;
+    }, 3000)
   }
 }

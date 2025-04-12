@@ -27,7 +27,6 @@ export default class EditEmpComponent extends Component {
   @tracked name = '';
   @tracked empId = '';
   @tracked designation = '';
-  @tracked isRendered = false;
   @tracked dob = '';
   @tracked doj = '';
   @tracked manager = '';
@@ -211,10 +210,20 @@ export default class EditEmpComponent extends Component {
     this.doj = e.target.value;
   }
 
+  @action
+  showCustomFlash() {
+    this.flashMessages.success('Employee details updated successfully!', {
+      timeout: 3000,
+      sticky: false,
+      showProgress: true,
+      type: 'custom-success', 
+    });
+
+  }
+
 
   @action EditEmployee(e) {
     e.preventDefault();
-    console.log('Flash service:', this.flashMessages);
 
     this.editingEmp.name = this.name;
     this.editingEmp.empId = this.empId;
@@ -223,22 +232,27 @@ export default class EditEmpComponent extends Component {
     this.editingEmp.doj = this.doj;
     this.editingEmp.manager = this.selectedManager?.name || this.manager;
 
+    this.showCustomFlash()
+    this.Back();
 
-    console.log('Updated:', empDetails);
-
-    this.flashMessages.success('Employee details updated successfully!');
-
-    this.router.transitionTo('');
-
-    this.name = '';
-    this.empId = '';
-    this.designation = '';
-    this.dob = '';
-    this.doj = '';
-    this.manager = '';
   }
 
-  @action Back(){
-    this.router.transitionTo('')
+  @action
+  Back() {
+    setTimeout(() => {
+      this.router.transitionTo('');
+    }, 3000); 
+  }
+  
+  @action
+  resetForm() {
+    setTimeout(() => {
+      this.name = '';
+      this.empId = '';
+      this.designation = '';
+      this.dob = '';
+      this.doj = '';
+      this.manager = '';
+    }, 3000)
   }
 }
