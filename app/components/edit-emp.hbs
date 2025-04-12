@@ -9,9 +9,14 @@
       <label>Employee Name:</label>
       <input type="text" value={{this.name}} {{on "input" this.setName}} />
     </div>
-    <div class="dialog-elem">
+    <div class="dialog-elemId">
       <label>Employee ID:</label>
-      <input type="text" value={{this.empId}} {{on "input" this.setEmpId}} />
+      <div class="empid-field">
+        <input type="text" value={{this.empId}} {{on "input" this.setEmpId}} {{on "input" this.checkEmpID}} />
+        {{#if (eq this.empId this.isEqualID)}}
+          <span class="empId-text">This Employee Id already exists.</span>
+        {{/if}}
+      </div>
     </div>
     <div class="dialog-elem">
       <label>Designation:</label>

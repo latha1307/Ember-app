@@ -211,3 +211,16 @@
   from { width: 100% }
   to   { width: 0 }
 }
+
+.empid-field{
+  display: flex;
+  flex-direction: column;
+  width: 53.5%;
+}
+
+.empId-text{
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+  margin-left: 4px;
+}

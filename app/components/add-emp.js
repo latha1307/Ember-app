@@ -18,6 +18,7 @@ export default class AddEmpComponent extends Component {
     { name: 'Eric' },
   ];
 
+  @tracked isEqualID = null;
   @tracked selectedManager = null;
   @tracked addLoading = false;
   @tracked name = '';
@@ -80,6 +81,12 @@ export default class AddEmpComponent extends Component {
       this.center2 = newCenter;
       console.log("New Center2:", this.center2); 
     }
+  }
+
+  @action
+  checkEmpID() {
+    let existing = empDetails.find((emp) => emp.empId === this.empId);
+    this.isEqualID = existing ? this.empId : null;
   }
   
   @action

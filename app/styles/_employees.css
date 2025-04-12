@@ -332,3 +332,12 @@ input {
   color: black;
   font-weight: 600;
 }
+
+.dialog-elemId{
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-elemId label{
+  font-size: 18px;
+}

@@ -15,6 +15,7 @@ export default class EditEmpComponent extends Component {
       { name: 'Tina' },
       { name: 'Eric' },
     ];
+  @tracked isEqualID = null;
   @tracked updateLoading = false;
   @tracked selectedManager = null;
   @tracked selectedDate = null;
@@ -100,6 +101,12 @@ export default class EditEmpComponent extends Component {
 
     }
 
+  }
+
+  @action
+  checkEmpID() {
+    let existing = empDetails.find((emp) => emp.empId === this.empId);
+    this.isEqualID = existing ? this.empId : null;
   }
 
   @action
