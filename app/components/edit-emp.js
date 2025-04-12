@@ -4,22 +4,30 @@ import { tracked } from '@glimmer/tracking';
 import { empDetails } from '../data/employeeData';
 import { inject as service } from '@ember/service';
 import { runTask, cancelTask } from 'ember-lifeline';
+import { DateTime } from 'luxon';
+
 
 export default class EditEmpComponent extends Component {
-    managers = [
-        { name: 'James' },
-        { name: 'Jonathan' },
-        { name: 'Ruth'},
-        { name: 'Tina' },
-        { name: 'Eric' },
-      ];
-    @tracked selectedManager = null;
-
+  managers = [
+      { name: 'James' },
+      { name: 'Jonathan' },
+      { name: 'Ruth'},
+      { name: 'Tina' },
+      { name: 'Eric' },
+    ];
+  @tracked selectedManager = null;
+  @tracked selectedDate = null;
+  @tracked selectedDojDate = null;
+  @tracked showCalendar = false;
+  @tracked showDojCalendar = false;
+  @tracked center2 = null;
+  @tracked center3 = null;
   @service router;
-
+  @service flashMessages;
   @tracked name = '';
   @tracked empId = '';
   @tracked designation = '';
+  @tracked isRendered = false;
   @tracked dob = '';
   @tracked doj = '';
   @tracked manager = '';
@@ -28,8 +36,51 @@ export default class EditEmpComponent extends Component {
   prevent(e) {
     return e.stopImmediatePropagation();
   }
+  months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
-  
+  groupedYears = [
+    {
+      groupName: "40's",
+      options: Array(...Array(10)).map((_, i) => `${i + 1940}`),
+    },
+    {
+      groupName: "50's",
+      options: Array(...Array(10)).map((_, i) => `${i + 1950}`),
+    },
+    {
+      groupName: "60's",
+      options: Array(...Array(10)).map((_, i) => `${i + 1960}`),
+    },
+    {
+      groupName: "70's",
+      options: Array(...Array(10)).map((_, i) => `${i + 1970}`),
+    },
+    {
+      groupName: "80's",
+      options: Array(...Array(10)).map((_, i) => `${i + 1980}`),
+    },
+    {
+      groupName: "90's",
+      options: Array(...Array(10)).map((_, i) => `${i + 1990}`),
+    },
+    {
+      groupName: "00's",
+      options: Array(...Array(10)).map((_, i) => `${i + 2000}`),
+    },
+  ];
 
   constructor() {
     super(...arguments);
@@ -41,6 +92,7 @@ export default class EditEmpComponent extends Component {
       this.designation = this.editingEmp.designation;
       this.dob = this.editingEmp.dob;
       this.doj = this.editingEmp.doj;
+      this.selectedDate = this.editingEmp.doj;
       this.selectedManager = this.managers.find(
         (m) => m.name === this.editingEmp.manager
       );
@@ -49,6 +101,53 @@ export default class EditEmpComponent extends Component {
     }
 
   }
+
+  @action
+  changeCenter2(unit, calendar, val) {
+    let newCenter = calendar.center.clone()[unit](val);
+    calendar.actions.changeCenter(newCenter);
+  }
+
+  @action
+  onCenterChange(selected) {
+    this.center2 = selected.date;
+  }
+
+  @action
+  onDojCenterChange(selected) {
+    this.center3 = selected.date;
+  }
+
+
+  @action
+  changeCenter3(unit, calendar, val) {
+    let newCenter = calendar.center.clone()[unit](val);
+    calendar.actions.changeCenter(newCenter);
+    this.center3 = DateTime.fromJSDate(newCenter.toJSDate());
+  }
+  
+  
+
+  @action
+  triggerDobPicker() {
+    this.showCalendar = !this.showCalendar;
+  }
+
+  @action
+  triggerDojPicker() {
+    this.showDojCalendar = !this.showDojCalendar;
+  }
+
+  @action
+  selectDob(selected) {
+    const selectedLuxon = selected.date?.toFormat ? selected.date : DateTime.fromJSDate(selected.date);
+  
+    this.selectedDate = selectedLuxon;
+    this.dob = selectedLuxon.toFormat('dd-MM-yyyy');
+    this.showCalendar = false;
+    console.log('Selected object:', this.dob);
+  }
+  
 
   @action
   open(dropdown) {
@@ -72,6 +171,20 @@ export default class EditEmpComponent extends Component {
     );
   }
 
+ 
+ 
+
+  @action
+  selectDoj(selected) {
+    const selectedDojLuxon = selected.date?.toFormat ? selected.date : DateTime.fromJSDate(selected.date);
+  
+    this.selectedDojDate = selectedDojLuxon;
+    this.doj = selectedDojLuxon.toFormat('dd-MM-yyyy');
+    this.showDojCalendar = false;
+    console.log('Selected DOJ:', this.doj);
+  }
+
+  
   @action
   selectManager(manager) {
     this.selectedManager = manager;
@@ -99,12 +212,9 @@ export default class EditEmpComponent extends Component {
   }
 
 
-  @action setHello(e){
-    console.log('changed')
-  }
-
   @action EditEmployee(e) {
     e.preventDefault();
+    console.log('Flash service:', this.flashMessages);
 
     this.editingEmp.name = this.name;
     this.editingEmp.empId = this.empId;
@@ -115,6 +225,8 @@ export default class EditEmpComponent extends Component {
 
 
     console.log('Updated:', empDetails);
+
+    this.flashMessages.success('Employee details updated successfully!');
 
     this.router.transitionTo('');
 

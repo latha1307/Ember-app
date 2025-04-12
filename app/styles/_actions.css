@@ -64,3 +64,118 @@
 }
 
 
+.daterangepicker {
+  width: 300px !important;   
+  height: auto !important;
+  overflow: hidden !important;
+  z-index: 9999 !important;  
+  border: 1px solid #ccc;
+}
+
+.daterangepicker .calendar {
+  width: 100% !important;
+  min-width: 260px;
+  max-width: 100%;
+}
+
+.daterangepicker .calendar-table {
+  width: 92%;
+  overflow-x: auto;
+  margin-right: 10px !important;
+
+}
+
+.daterangepicker .calendar-table table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.daterangepicker td,
+.daterangepicker th {
+  font-size: 14px;
+  padding: 6px 4px;
+}
+
+.dob-custom {
+  width: 53.5%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.dob-custom input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.dob-custom .calender-icon {
+  background-color: #03549b;
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-calendar-small {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.nav-arrow {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-arrow:hover {
+  background-color: #e0e0e0;
+}
+
+.calendar-dropdowns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ember-power-select-trigger {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  min-width: 100px;
+  font-size: 14px;
+  cursor: pointer;
+}
+

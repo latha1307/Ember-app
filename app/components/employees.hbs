@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="table-container">
+  <div class="table-container tableDetails">
     <table>
       <thead>
         <tr class="emp-details">
@@ -54,4 +54,22 @@
         {{/each}}
       </tbody>
     </table>
+    <br />
+    <br />
+    <h2 class="job-title">Job Openings</h2>
+  <div class="vertical-collection-container">
+    {{#if this.jobPosts.length}}
+        <VerticalCollection
+          @items={{this.jobPosts}}
+          @itemHeight={{50}}
+          @estimateHeight={{50}}
+          @key="id"
+          as |jobPost|
+        >
+          <JobOpenings @jobPost={{jobPost}} />
+        </VerticalCollection>
+    {{else}}
+      <p>No job posts found</p>
+    {{/if}}
+  </div>
   </div>

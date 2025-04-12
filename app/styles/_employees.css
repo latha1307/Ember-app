@@ -85,7 +85,7 @@ main {
   font-size: 32px;
 }
 
-table {
+.tableDetails table {
   overflow: hidden;
   margin-top: 20px;
   border-collapse: separate;
@@ -97,11 +97,11 @@ table {
   box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 10%);
 }
 
-tbody {
+.tableDetails tbody {
   overflow: auto;
 }
 
-th {
+.tableDetails th {
   z-index: 10;
   background-color: chocolate;
   color: #fff;
@@ -110,28 +110,28 @@ th {
   letter-spacing: 1px;
 }
 
-table tr:first-child th:last-child {
+.tableDetails table tr:first-child th:last-child {
   border-top-right-radius: 10px;
 }
 
-table tr:first-child th:first-child {
+.tableDetails table tr:first-child th:first-child {
   border-top-left-radius: 10px;
 }
 
-table tr:last-child td:last-child {
+.tableDetails table tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
 
-table tr:last-child td:first-child {
+.tableDetails table tr:last-child td:first-child {
   border-bottom-left-radius: 10px;
 }
 
-td {
+.tableDetails td {
   text-align: center;
   height: 50px;
 }
 
-tr:nth-child(even) {
+.tableDetails tr:nth-child(even) {
   background-color: #ddd;
 }
 
@@ -269,4 +269,66 @@ input {
 .editBtn:hover {
   background-color: #cccccc89;
   padding: 8px;
+}
+
+.vertical-collection-container{
+  height: 500px;
+  width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  overflow: hidden;
+  overflow-y: auto;
+  box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 8%);
+}
+
+.job-title{
+  font-size: 30px;
+  color: #1654b0;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.job-container{
+  height: 170px;
+  padding: 20px;
+  margin: 20px;
+  word-spacing: 2px;
+  text-align: justify;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 10%);
+}
+
+
+ .job-container > * + * {
+  margin-top: 1rem;
+}
+
+.job-skills{
+  display: flex;
+  gap: 10px;
+}
+
+.labelBtn{
+  padding: 6px 10px;
+  border-radius: 30px;
+}
+
+.job-details{
+  display: flex;
+  gap: 20px;
+}
+
+.job-details .icons{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: rgb(120, 120, 120);
+}
+
+.job-details .icons .text{
+  color: black;
+  font-weight: 600;
 }

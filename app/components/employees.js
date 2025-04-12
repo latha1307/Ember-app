@@ -18,9 +18,14 @@ export default class EmployeesComponent extends Component {
   @tracked dob = '';
   @tracked doj = '';
   @tracked manager = '';
+  @tracked jobPosts = [
+    { id: 1, skills:[ {label: 'ReactJS', labelColor: '#EEEFFB', textColor: '#493196'}, {label: 'ExpressJS', labelColor: 'rgb(181, 243, 181)', textColor: 'green'} ], work: 'Part Time', salary: '$100-$200k', location: 'Remote', title: 'Full Stack Developer', description: 'Proficient in both front-end (client-side) and back-end (server-side) development. '},
+    { id: 2, skills:[ {label: 'React Native', labelColor: 'rgb(196, 220, 240)', textColor: 'rgb(5, 80, 142)'}],  work: 'Part Time', location: 'Hybrid', salary: '$60-$120k', title: 'Frontend Developer',  description: 'Responsible for building the user-facing portion of websites and web applications, focusing on the visual and interactive aspects.'},
+    { id: 3, skills:[ {label: 'MSSQL', labelColor: 'rgb(252, 255, 179)', textColor: 'rgb(116, 100, 28)'}],  work: 'Part Time', location: 'In Office', salary: '$80-$140k', title: 'Backend Developer', description: 'Responsible for the server-side logic, databases, and infrastructure that powers web applications and software.  '}
+  ];
 
   get filteredEmployees() {
-    if (!this.search) return this.employees;
+    if (!this.search) return this.employees;  
     return this.employees.filter(
       (e) =>
         e.name.toLowerCase().includes(this.search.toLowerCase()) ||

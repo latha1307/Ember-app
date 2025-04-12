@@ -18,14 +18,71 @@
       <label>Designation:</label>
       <input type="text" value={{this.designation}} {{on "input" this.setDesignation}} />
     </div>
+
     <div class="dialog-elem">
-      <label>DOB:</label>
-      <input type="date" value={{this.dob}} {{on "input" this.setDob}} />
-    </div>
-    <div class="dialog-elem">
-      <label>Date Of Joining:</label>
-      <input type="date" value={{this.doj}} {{on "input" this.setDoj}} />
-    </div>
+  <label>DOB:</label>
+  <div class="dob-custom">
+    <input
+      type="text"
+      class="form-control"
+      value={{this.dob}}
+      readonly
+      {{on "click" this.triggerDobPicker}}
+    />
+
+    <span class="material-icons calender-icon" {{on "click" this.triggerDobPicker}}>
+      calendar_month
+    </span>
+
+    {{#if this.showCalendar}}
+      <PowerCalendar
+        class="demo-calendar-small"
+        @navComponent={{component "calendar-nav-with-year-buttons"}}
+        @center={{this.center2}}
+        @selected={{this.selectedDate}}
+        @onSelect={{this.selectDob}}
+        @onCenterChange={{this.onCenterChange}} as |cal|>
+      
+        <cal.Nav />
+        <cal.Days />
+      </PowerCalendar>
+
+
+    {{/if}}
+  </div>
+</div>
+
+<div class="dialog-elem">
+  <label>Date Of Joining:</label>
+  <div class="dob-custom">
+    <input
+      type="text"
+      class="form-control"
+      value={{this.doj}}
+      readonly
+      {{on "click" this.triggerDojPicker}}
+    />
+
+    <span class="material-icons calender-icon" {{on "click" this.triggerDojPicker}}>
+      calendar_month
+    </span>
+
+    {{#if this.showDojCalendar}}
+      <PowerCalendar
+        class="demo-calendar-small"
+        @navComponent={{component "calendar-nav-with-year-buttons"}}
+        @center={{this.center3}}
+        @selected={{this.selectedDojDate}}
+        @onSelect={{this.selectDoj}}
+        @onCenterChange={{this.onDojCenterChange}} as |calen|>
+
+
+        <calen.Nav />
+        <calen.Days />
+      </PowerCalendar>
+    {{/if}}
+  </div>
+</div>
 
   <div class="dialog-elem">
     <label class="manager-label">Manager:</label>

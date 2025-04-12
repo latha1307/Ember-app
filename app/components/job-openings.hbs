@@ -1,0 +1,25 @@
+<div class="job-container">
+    <div class="job-skills">
+    {{#each @jobPost.skills as |skill|}}
+        <div class="labelBtn" style={{concat "background-color:" skill.labelColor }} >
+           <span style={{concat "color:" skill.textColor}}>{{skill.label}}</span> 
+        </div>
+    {{/each}}
+    </div>
+    <h2 style="font-size: 24px;">{{@jobPost.title}}</h2>
+    <p>{{@jobPost.description}}</p>
+    <div class="job-details">
+        <div class="icons">
+            <span class="material-icons">schedule</span>
+            <span class="text">{{@jobPost.work}}</span>
+        </div>
+        <div class="icons">
+            <span class="material-icons">location_on</span>
+            <span class="text">{{@jobPost.location}}</span>
+        </div>
+        <div class="icons">
+            <span class="material-icons">payments</span>
+            <span class="text">{{@jobPost.salary}}</span>
+        </div>
+    </div>
+</div>
