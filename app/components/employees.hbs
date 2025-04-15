@@ -1,11 +1,11 @@
   <h1 class="header">Employee Details</h1>
 
-  <div class="buttons-container">
+  <div class="buttons-container" >
     <div class="btn-group">
       <div class="initBtns">
-        <LinkTo @route="addEmp">
-        <button class="add" type="button">
-          <span class="plus">&#43;</span> Add Employee
+        <LinkTo @route="addEmp" style="text-decoration: none;">
+        <button class="add" type="button" {{on-key "ctrl+n" this.add}} >
+          <span class="material-icons plus">add</span> Add Employee
         </button>
         </LinkTo>
         <div>
@@ -49,27 +49,12 @@
             <td>{{emp.doj}}</td>
             <td>{{emp.manager}}</td>
             <td><LinkTo @route="editEmp" @model={{emp.empId}} ><span class="material-icons editBtn" >edit</span></LinkTo></td>
-            <td><input type="checkbox" checked={{if emp.selected "checked" ""}}  {{on "click" (fn this.toggleSelect emp)}} /></td>
+            <td><input type="checkbox" checked={{if emp.selected "checked" ""}}  {{on "click" (fn this.toggleSelect emp)}}  /></td>
           </tr>
         {{/each}}
       </tbody>
     </table>
     <br />
     <br />
-    <h2 class="job-title">Job Openings</h2>
-  <div class="vertical-collection-container">
-    {{#if this.jobPosts.length}}
-        <VerticalCollection
-          @items={{this.jobPosts}}
-          @itemHeight={{50}}
-          @estimateHeight={{50}}
-          @key="id"
-          as |jobPost|
-        >
-          <JobOpenings @jobPost={{jobPost}} />
-        </VerticalCollection>
-    {{else}}
-      <p>No job posts found</p>
-    {{/if}}
-  </div>
+
   </div>

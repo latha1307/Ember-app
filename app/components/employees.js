@@ -2,6 +2,8 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { empDetails } from '../data/employeeData';
+import { jobPostsData } from '../data/jobPostData';
+import { service } from '@ember/service';
 
 import Employee from '../models/employee';
 
@@ -11,6 +13,7 @@ export default class EmployeesComponent extends Component {
   @tracked search = '';
   @tracked selected = false;
   @tracked editingEmp = null;
+  @service router;
 
   @tracked name = '';
   @tracked empId = '';
@@ -18,11 +21,7 @@ export default class EmployeesComponent extends Component {
   @tracked dob = '';
   @tracked doj = '';
   @tracked manager = '';
-  @tracked jobPosts = [
-    { id: 1, skills:[ {label: 'ReactJS', labelColor: '#EEEFFB', textColor: '#493196'}, {label: 'ExpressJS', labelColor: 'rgb(181, 243, 181)', textColor: 'green'} ], work: 'Part Time', salary: '$100-$200k', location: 'Remote', title: 'Full Stack Developer', description: 'Proficient in both front-end (client-side) and back-end (server-side) development. '},
-    { id: 2, skills:[ {label: 'React Native', labelColor: 'rgb(196, 220, 240)', textColor: 'rgb(5, 80, 142)'}],  work: 'Part Time', location: 'Hybrid', salary: '$60-$120k', title: 'Frontend Developer',  description: 'Responsible for building the user-facing portion of websites and web applications, focusing on the visual and interactive aspects.'},
-    { id: 3, skills:[ {label: 'MSSQL', labelColor: 'rgb(252, 255, 179)', textColor: 'rgb(116, 100, 28)'}],  work: 'Part Time', location: 'In Office', salary: '$80-$140k', title: 'Backend Developer', description: 'Responsible for the server-side logic, databases, and infrastructure that powers web applications and software.  '}
-  ];
+  @tracked jobPosts = jobPostsData;
 
   get filteredEmployees() {
     if (!this.search) return this.employees;  
@@ -47,76 +46,46 @@ export default class EmployeesComponent extends Component {
     this.search = e.target.value;
   }
 
-  @action openEditDialog(emp) {
-    this.editingEmp = emp;
-    this.name = emp.name;
-    this.empId = emp.empId;
-    this.designation = emp.designation;
-    this.dob = this.formatDate(emp.dob);
-    this.doj = this.formatDate(emp.doj);
-    this.manager = emp.manager;
-    this.dialogOpen = true;
-    console.log(emp);
+  @action 
+  add(e) {
+    e.preventDefault()
+    this.router.transitionTo('addEmp')
   }
 
-  @action closeDialog() {
-    this.dialogOpen = false;
-    this.resetForm();
-    this.editingEmp = null;
+  @action 
+  edit(e) {
+    e.preventDefault()
+    this.router.transitionTo('editEmp')
   }
 
-  @action setName(e) {
-    this.name = e.target.value;
+  @action 
+  loadMore() {
+    let currentLength = this.jobPosts.length;
+    const repeatJobs = this.jobPosts.map((jobPost, index) => {
+      return {
+        ...jobPost,
+        id : currentLength + index + 1
+      };
+    });
+
+    this.jobPosts = [...this.jobPosts, ...repeatJobs];
   }
 
-  @action setEmpId(e) {
-    this.empId = e.target.value;
-  }
-
-  @action setDesignation(e) {
-    this.designation = e.target.value;
-  }
-
-  @action setDob(e) {
-    this.dob = e.target.value;
-  }
-
-  @action setDoj(e) {
-    this.doj = e.target.value;
-  }
-
-  @action setManager(e) {
-    this.manager = e.target.value;
-  }
-
-  @action addEditEmployee(e) {
-    e.preventDefault();
-
-    if (this.editingEmp) {
-      this.editingEmp.name = this.name;
-      this.editingEmp.empId = this.empId;
-      this.editingEmp.designation = this.designation;
-      this.editingEmp.dob = this.dob;
-      this.editingEmp.doj = this.doj;
-      this.editingEmp.manager = this.manager;
-      this.employees = [...this.employees];
-    } else {
-      this.employees = [
-        ...this.employees,
-        {
-          name: this.name,
-          empId: this.empId,
-          designation: this.designation,
-          dob: this.dob,
-          doj: this.doj,
-          manager: this.manager,
-          selected: false,
-        },
-      ];
+    @action 
+    loadAbove() {
+      let minId = Math.min(...this.jobPosts.map(job => job.id));
+      console.log(minId)
+      const repeatAboveJobs = this.jobPosts.map((jobPost, index) => {
+        return {
+          ...jobPost,
+          id : minId - (index + 1)
+        }
+      })
+      console.log(repeatAboveJobs)
+      this.jobPosts = [...repeatAboveJobs, ...this.jobPosts]
     }
 
-    this.closeDialog();
-  }
+
 
   @action toggleSelect(emp) {
     emp.selected = !emp.selected;

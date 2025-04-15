@@ -1,0 +1,24 @@
+<div class="leave-card">
+    <div class="emp-profile">
+        <img src="assets/images/profile-icon.png" alt="">
+        <div class="emp-Name-role" >
+            <h4>{{@leaveRequest.empName}}</h4>
+            <p>{{@leaveRequest.role}}</p>
+        </div>
+    </div>
+    <div class="emp-brief">
+        <div class="emp-id">
+            <span>Employee ID: </span> {{@leaveRequest.empId}}
+        </div>
+        <div class="period">
+            <span>Leave Period: </span> {{@leaveRequest.requestDates}}
+        </div>
+        <div class="leave-type">
+            <span>Leave Type: </span> {{@leaveRequest.Reason}}
+        </div>
+    </div>
+    <div class="leave-btns">
+        <button class="reject leave-btn">Reject</button>
+        <button class="approve leave-btn">Approve</button>
+    </div>
+</div>

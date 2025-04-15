@@ -1,0 +1,21 @@
+
+
+<h2 class="job-title">Leave Requests</h2>
+  <div class="vertical-leave-container">
+    {{#if this.leaveRequests.length}}
+        <VerticalCollection
+          @items={{this.leaveRequests}}
+          @itemHeight={{50}}
+          @estimateHeight={{150}}
+          @staticHeight={{true}}
+          @bufferSize={{50}}
+          @key="empId"
+          @containerSelector="body"
+          as |leaveRequest|
+        >
+          <LeaveRequestsEmp @leaveRequest={{leaveRequest}} />
+        </VerticalCollection>
+    {{else}}
+      <p>No job posts found</p>
+    {{/if}}
+  </div>

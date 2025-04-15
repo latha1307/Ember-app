@@ -1,0 +1,37 @@
+<main>
+    <div class="navbar-container">
+        <div class="logo-card">
+        <img src='assets/images/ed logo.jpg' alt="Logo" class="logo">
+        </div>
+        <hr class="hr-line">
+        <div class="navigation">
+            {{#each this.navItems as |navItem|}}
+                <LinkTo @route={{navItem.path}} style="text-decoration: none;cursor: pointer;" class="nav-items">
+                        <div class="navText">
+                            <span class="material-icons">{{navItem.icon}}</span>
+                        {{navItem.label}}
+                        {{#if navItem.subLabels}}
+                            {{#if this.isArrowDown}}
+                            <span class="material-icons" {{on 'click' this.toggleArrowDown}}>keyboard_arrow_up</span>
+                            {{else}}
+                            <span class="material-icons" {{on 'click' this.toggleArrowDown}}>keyboard_arrow_down</span>
+                            {{/if}}
+                        {{/if}}
+                        </div>
+                        {{#if navItem.subLabels}}
+                           {{#if this.isArrowDown}}
+                           <div class="sub-navigation">
+                            {{#each navItem.subLabels as |item|}}
+                            <LinkTo @route={{item.path}} class="nav-subItems">
+                                <span class="material-icons">{{item.icon}}</span>
+                                {{item.label}}
+                            </LinkTo>
+                           {{/each}}
+                           </div>
+                           {{/if}}
+                        {{/if}}
+                </LinkTo>
+            {{/each}}
+        </div>
+    </div>
+</main>

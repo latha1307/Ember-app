@@ -227,18 +227,24 @@ export default class AddEmpComponent extends Component {
       this.addLoading = false;
       },2000);
       this.showCustomFlash()
-      this.Back();
+      this.Back3();
     })
 
 
   }
 
   @action
-  Back() {
+  Back3() {
     setTimeout(() => {
       this.router.transitionTo('');
     }, 3000); 
   }
+
+  @action
+  Back() {
+    this.router.transitionTo('');
+  }
+  
   
   @action
   resetForm() {

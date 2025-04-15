@@ -1,0 +1,85 @@
+.logo{
+    width: 100px;
+    margin: 20px 65px;
+    display: flex;
+    justify-content: center;    
+    border-radius: 10px;
+    box-shadow: 6px 6px 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.hr-line{
+    height: 1px;
+    background-color: rgb(245, 245, 245);
+    border: none;
+    margin-bottom: 40px;
+}
+
+.navigation{
+    margin: 10px 10px;
+}
+
+.navText{
+    display: flex;
+    gap: 20px;
+    left: 0;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.sub-navigation{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-items{
+    margin: 20px 0;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-items span{
+    margin-left: 5px;
+}
+
+.navText:hover{
+    background-color: #CA4878;
+}
+
+.nav-subItems{
+    margin: 10px 0;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 17px;
+    display: flex;
+    color: white;
+    justify-content: left;
+    text-decoration: none;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 20px;
+
+}
+
+.nav-subItems:hover{
+    background-color: #CA4878;
+}
+
+
+.navbar-container{
+    background-color: #2E5077;
+    color: whitesmoke;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    z-index: 1000;
+}

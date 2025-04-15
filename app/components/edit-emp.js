@@ -6,7 +6,6 @@ import { inject as service } from '@ember/service';
 import { runTask, cancelTask } from 'ember-lifeline';
 import { DateTime } from 'luxon';
 
-
 export default class EditEmpComponent extends Component {
   managers = [
       { name: 'James' },
@@ -100,8 +99,9 @@ export default class EditEmpComponent extends Component {
       console.log(this.editingEmp.manager)
 
     }
-
   }
+
+  
 
   @action
   checkEmpID() {
@@ -256,15 +256,20 @@ export default class EditEmpComponent extends Component {
     this.updateLoading = false;
     }, 2000)
     this.showCustomFlash()
-    this.Back();
+    this.Back3();
   });
 }
 
   @action
-  Back() {
+  Back3() {
     setTimeout(() => {
       this.router.transitionTo('');
     }, 3000); 
+  }
+
+  @action
+  Back() {
+    this.router.transitionTo('');
   }
   
   @action

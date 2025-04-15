@@ -1,10 +1,10 @@
-main {
-  margin: 5%;
+.container{
+  margin: 50px 20px 0px 260px;
 }
-
 .header {
   text-align: center;
   color: rgb(151 71 14);
+  text-shadow: 6px 6px 15px rgba(0, 0, 0, 0.219);
 }
 
 .buttons-container {
@@ -17,6 +17,7 @@ main {
 }
 
 .add {
+  display: inline-block;
   border-style: none;
   box-shadow: rgb(149 157 165 / 20%) 0 8px 24px;
   background-color: rgb(26 104 214);
@@ -30,9 +31,14 @@ main {
   letter-spacing: 1px;
 }
 
+
 .delete:hover {
   background-color: rgb(161 36 19);
   transform: scale(1.05);
+}
+
+.material-icons{
+  background-color: inherit;
 }
 
 .delete {
@@ -55,6 +61,7 @@ main {
 
 .plus {
   font-size: 18px;
+  vertical-align: middle;
 }
 
 .initBtns {
@@ -67,7 +74,8 @@ main {
 }
 
 .search-container {
-  background-color: rgb(239 239 239);
+  background-color: white;
+  box-shadow: rgb(149 157 165 / 20%) 0 8px 24px;
   padding: 8px 16px;
   border-radius: 40px;
   display: flex;
@@ -90,6 +98,7 @@ main {
   margin-top: 20px;
   border-collapse: separate;
   border-spacing: 0;
+  background-color: white;
   max-height: 500px;
   width: 100%;
   border: 1px solid rgb(134 132 132 / 81%);
@@ -97,8 +106,17 @@ main {
   box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 10%);
 }
 
+.tableDetails table td{
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+}
+
 .tableDetails tbody {
   overflow: auto;
+}
+
+.tableDetails .ember-view{
+  background-color: white;
 }
 
 .tableDetails th {
@@ -132,7 +150,7 @@ main {
 }
 
 .tableDetails tr:nth-child(even) {
-  background-color: #ddd;
+  background-color: #ddd !important;
 }
 
 dialog {
@@ -194,7 +212,10 @@ input {
   gap: 90px;
   margin-bottom: 30px;
   color: #1654b0;
+  background-color: inherit;
 }
+
+
 
 .manager-label{
   width: 232px;
@@ -222,15 +243,13 @@ input {
   font-size: 16px;
 }
 
-.dialog-head div{
+.dialog-head div span{
   text-align: center;
-  vertical-align: middle;
   cursor: pointer;
-  padding: 2px 4px;
-
+  padding: 3px 4px;
 }
 
-.dialog-head div:hover{
+.dialog-head div span:hover{
   background-color: #ddd;
   border-radius: 100%;
 }
@@ -262,6 +281,7 @@ input {
 
 .editBtn {
   color: #1665dc;
+  background-color: white;
   cursor: pointer;
   border-radius: 100%;
 }
@@ -272,7 +292,7 @@ input {
 }
 
 .vertical-collection-container{
-  height: 500px;
+  height: 550px;
   width: 600px;
   margin: auto;
   padding: 20px;
@@ -283,15 +303,17 @@ input {
   box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 8%);
 }
 
+
+
 .job-title{
   font-size: 30px;
   color: #1654b0;
   text-align: center;
   margin-bottom: 30px;
+  text-shadow: 6px 6px 15px rgba(0, 0, 0, 0.219);
 }
 
 .job-container{
-  height: 170px;
   padding: 20px;
   margin: 20px;
   word-spacing: 2px;
@@ -309,6 +331,7 @@ input {
 .job-skills{
   display: flex;
   gap: 10px;
+  background-color: white;
 }
 
 .labelBtn{
@@ -316,9 +339,16 @@ input {
   border-radius: 30px;
 }
 
+.labelBtn span{
+  background-color: inherit;
+}
+
 .job-details{
   display: flex;
   gap: 20px;
+  background-color: white;
+
+
 }
 
 .job-details .icons{
@@ -326,11 +356,15 @@ input {
   align-items: center;
   gap: 2px;
   color: rgb(120, 120, 120);
+  background-color: white;
+
 }
 
 .job-details .icons .text{
   color: black;
   font-weight: 600;
+  background-color: white;
+
 }
 
 .dialog-elemId{

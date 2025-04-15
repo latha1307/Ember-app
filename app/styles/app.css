@@ -1,5 +1,7 @@
 @import url("./_employees.css");
 @import url("./_actions.css");
+@import url("./_navbar.css");
+@import url("./_leave.css");
 
 * {
   margin: 0;
