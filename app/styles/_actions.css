@@ -181,7 +181,8 @@
 
 .alert-progress{
   background-color: white ;
-  height: 60px;
+  box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.1);
+  height: 80px;
   width: 350px;
   z-index: 20;
   position: absolute;
@@ -195,6 +196,20 @@
   border-top-left-radius: 5px;
 }
 
+
+
+
+
+.flash-title {
+  margin-left: 10px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.flash-message {
+  margin-left: 10px;
+}
+
 .alert-progress h3 p{
   padding-left: 4px;
   border-end-end-radius: 10px;
@@ -202,9 +217,24 @@
 
 .alert-progressBar{
   height: 4px;
-  background-color: green;
   bottom: 0;
   animation: progressAnimationStrike 3s;
+}
+
+.alert-progressBar.Danger{
+  background-color: #f44336;
+}
+
+.alert-progressBar.Success{
+  background-color: #4CAF50;
+}
+
+.alert-progressBar.Warning{
+  background-color: #ff9800;
+}
+
+.alert-progressBar.Info{
+  background-color: #2196F3;
 }
 
 @keyframes progressAnimationStrike {

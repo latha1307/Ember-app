@@ -92,3 +92,127 @@
     background-color: rgb(124, 0, 0);
     transform: scale(1.05);
   }
+
+.apply-leave-card{
+    border: 1px solid rebeccapurple;
+    height: 480px;
+    box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 30px;
+}
+
+.leave-title{
+    font-size: 24px;
+    font-weight: 600;
+    color: rebeccapurple;
+}
+
+.apply-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.multiple-month-power-calendar-horizontal {
+    @include ember-power-calendar($cell-size: 46px);
+  
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  
+    .ember-power-calendar-nav-title {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-around;
+  
+      .month-name {
+        flex-grow: 1;
+        width: calc(50% - 0.5rem);
+  
+        &:first-child {
+          margin-right: 1rem;
+        }
+      }
+    }
+  
+    .months-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+  
+      .ember-power-calendar-days {
+        width: calc(50% - 0.5rem);
+      }
+    }
+  }
+
+.leave-fields-column{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 30px 30px 30px;
+}
+
+.leave-fields-column .remaining-field{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.remaining-field input{
+    width: 300px;
+}
+
+.trigger-bootstrap-feel{
+    width: 300px; 
+}
+
+.calender{
+    text-align: center;
+}
+
+.calender-indication{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 8px;
+}
+
+.calender-indication .square{
+    display: inline-block;
+    background-color: #C9E9FF;
+    border: 1px solid #b2e0ff;
+    height: 20px;
+    width: 20px;
+}
+
+.send-leave-container{
+    float: right;
+    margin: 0 60px;
+}
+
+.send-button{
+    padding: 6px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 1s all;
+}
+
+.send-button:hover {
+    background-color: rgb(80, 39, 120);
+    transform: scale(1.05);
+  }

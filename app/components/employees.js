@@ -33,6 +33,8 @@ export default class EmployeesComponent extends Component {
         e.manager.toLowerCase().includes(this.search.toLowerCase()),
     );
   }
+
+
   formatDate(date) {
     if (!date) return '';
     const d = new Date(date);

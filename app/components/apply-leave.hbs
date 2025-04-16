@@ -1,0 +1,132 @@
+<h1 class="job-title">Apply Leave</h1>
+<div class="apply-leave-card">
+    <h1 class="leave-title">Leave Request</h1>
+    <div class="apply-container">
+        <div class="calender">
+            <PowerCalendarRange
+                class='multiple-month-power-calendar-horizontal'
+                @center={{this.center}}
+                @selected={{this.selected}}
+                @onCenterChange={{this.onCenterChange}}
+                @onSelect={{this.onSelect}} as |calendar|>
+                <calendar.Nav>
+                  <div class='month-name'>
+                    {{power-calendar-format-date calendar.center 'MMMM' locale=calendar.locale}} {{power-calendar-format-date calendar.center 'yyyy' locale=calendar.locale}}
+                  </div>
+                  <div class='month-name'>
+                    {{power-calendar-format-date this.nextMonthsCenter 'MMMM' locale=calendar.locale}} {{power-calendar-format-date calendar.center 'yyyy' locale=calendar.locale}}
+                  </div>
+                </calendar.Nav>
+
+
+                <div class='months-container'>
+                  <calendar.Days @showDaysAround={{false}}/>
+                  <calendar.Days @center={{this.nextMonthsCenter}} @showDaysAround={{false}}/>
+                </div>
+            </PowerCalendarRange>
+            <div class="calender-indication">
+                <span class="square"></span>
+                <p> - Selected</p>
+            </div>
+        </div>
+        <div class="leave-fields-column">
+            <div class="remaining-field" >
+                <span>Leave Remaining : </span>
+                <input type="text" value="Privilage Leave(10 Days)" disabled>
+            </div>
+            <div class="remaining-field">
+                <span>Approval Manager :</span>
+                <BasicDropdown as |dd|>   
+                    <dd.Trigger
+                    class="trigger-bootstrap-feel"
+                     {{on 'mousedown' this.prevent}}
+                    {{on 'mouseenter' (fn this.open dd)}}
+                    {{on 'mouseleave' (fn this.closeLater dd)}}
+                    >
+                    <div class="drop-field">
+                        {{or this.selectedManager.name "Select Manager"}}
+                        <span class="material-icons"> keyboard_arrow_down </span>
+                    </div>
+                    </dd.Trigger>
+                <dd.Content
+                  class="content-bootstrap-feel"
+                  {{on 'mouseenter' (fn this.open dd)}}
+                  {{on 'mouseleave' (fn this.closeLater dd)}}
+                >
+                  {{#each this.managers as |manager|}}
+                    <p class="dropdown-item" {{on "click" (fn this.selectManager manager)}} >
+                      {{manager.name}}
+                    </p>
+                  {{/each}}
+                </dd.Content>
+              </BasicDropdown>
+            </div>
+            <div class="remaining-field">
+                <span>Leave Type :</span>
+                <BasicDropdown as |dd|>   
+                    <dd.Trigger
+                    class="trigger-bootstrap-feel"
+                     {{on 'mousedown' this.prevent}}
+                    {{on 'mouseenter' (fn this.open dd)}}
+                    {{on 'mouseleave' (fn this.closeLater dd)}}
+                    >
+                    <div class="drop-field">
+                        {{or this.selectedLeave.type "Select Leave"}}
+                        <span class="material-icons"> keyboard_arrow_down </span>
+                    </div>
+                    </dd.Trigger>
+                <dd.Content
+                  class="content-bootstrap-feel"
+                  {{on 'mouseenter' (fn this.openLeave dd)}}
+                  {{on 'mouseleave' (fn this.closeLaterLeave dd)}}
+                >
+                  {{#each this.leaveTypes as |leave|}}
+                    <p class="dropdown-item" {{on "click" (fn this.selectLeave leave)}} >
+                      {{leave.type}}
+                    </p>
+                  {{/each}}
+                </dd.Content>
+              </BasicDropdown>
+            </div>
+            <div class="remaining-field">
+                <span>Selected Dates : </span>
+                <input type="text" value={{this.formattedDateRange}} readonly>
+            </div>
+        </div>
+       
+    </div>
+     <div class="send-leave-container">
+            <button class="send-button" {{on 'click' this.sendRequest}} {{on "dblclick" this.flashDanger}} {{on 'mouseover' this.flashDouble}}>
+                Send Request<span class="material-icons">send</span>
+            </button>
+    </div>
+
+{{#each this.flashMessages.queue as |flash|}}
+  <FlashMessage @flash={{flash}} as |component flash|>
+    {{#if component.showProgressBar}}
+      <div class="alert-progress ">
+        <h3 class="flash-title">{{component.flashType}}</h3>
+        <p class="flash-message">{{flash.message}}</p>
+        <div class="alert-progressBar {{component.flashType}}"  style="{{component.progressDuration}}">
+        </div>
+      </div>
+    {{/if}}
+  </FlashMessage>
+{{/each}}
+
+<div {{did-insert this.showInitialFlashMessage}}>
+    {{#each this.flashMessages.queue as |flash|}}
+  <FlashMessage @flash={{flash}} as |component flash|>
+    {{#if component.showProgressBar}}
+      <div class="alert-progress ">
+        <h3 class="flash-title">{{component.flashType}}</h3>
+        <p class="flash-message">{{flash.message}}</p>
+        <div class="alert-progressBar {{component.flashType}}"  style="{{component.progressDuration}}">
+        </div>
+      </div>
+    {{/if}}
+  </FlashMessage>
+{{/each}}
+</div>
+
+</div>

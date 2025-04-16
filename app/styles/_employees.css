@@ -94,14 +94,12 @@
 }
 
 .tableDetails table {
-  overflow: hidden;
-  margin-top: 20px;
+  overflow-y: auto;
   border-collapse: separate;
   border-spacing: 0;
   background-color: white;
   max-height: 500px;
   width: 100%;
-  border: 1px solid rgb(134 132 132 / 81%);
   border-radius: 10px;
   box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 10%);
 }
@@ -119,13 +117,16 @@
   background-color: white;
 }
 
-.tableDetails th {
-  z-index: 10;
+.tableDetails thead th {
+  position: sticky;
+  top: 0;
   background-color: chocolate;
-  color: #fff;
+  color: white;
+  z-index: 5;
   height: 70px;
   font-size: larger;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 .tableDetails table tr:first-child th:last-child {
@@ -152,6 +153,25 @@
 .tableDetails tr:nth-child(even) {
   background-color: #ddd !important;
 }
+
+.scroll-wrapper {
+  margin-top: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgb(134 132 132 / 81%);
+  box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 10%);
+  background: transparent;
+}
+
+.table-header{
+  position: fixed;
+  position: relative;
+  width: 100%;
+  z-index: 50;
+}
+
 
 dialog {
   position: fixed;

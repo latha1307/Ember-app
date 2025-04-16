@@ -23,38 +23,57 @@
     </div>
   </div>
 
-  <div class="table-container tableDetails">
-    <table>
-      <thead>
-        <tr class="emp-details">
-          <th>S.No</th>
-          <th>Employee ID</th>
-          <th>Employee Name</th>
-          <th>Designation</th>
-          <th>DOB</th>
-          <th>Date Of Joining</th>
-          <th>Manager</th>
-          <th>Actions</th>
-          <th><input type="checkbox" {{on "change" this.selectAll}}> Select All</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each this.filteredEmployees as |emp index|}}
-          <tr>
-            <td>{{inc index}}</td>
-            <td>{{emp.empId}}</td>
-            <td>{{emp.name}}</td>
-            <td>{{emp.designation}}</td>
-            <td>{{emp.dob}}</td>
-            <td>{{emp.doj}}</td>
-            <td>{{emp.manager}}</td>
-            <td><LinkTo @route="editEmp" @model={{emp.empId}} ><span class="material-icons editBtn" >edit</span></LinkTo></td>
-            <td><input type="checkbox" checked={{if emp.selected "checked" ""}}  {{on "click" (fn this.toggleSelect emp)}}  /></td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    <br />
-    <br />
+<div class="table-container tableDetails">
+  <div class="scroll-wrapper">
+<table>
+  <thead class="table-header">
+    <tr>
+      <th>S.No</th>
+      <th>Employee ID</th>
+      <th>Employee Name</th>
+      <th>Designation</th>
+      <th>DOB</th>
+      <th>Date Of Joining</th>
+      <th>Manager</th>
+      <th>Actions</th>
+      <th><input type="checkbox" {{on "change" this.selectAll}}> Select All</th>
+    </tr>
+  </thead>
 
+  <VerticalCollection
+    @items={{this.filteredEmployees}}
+    @tagName="tbody"
+    @estimateHeight={{50}}
+    @staticHeight={{true}}
+    @containerSelector=".scroll-wrapper"
+    @key="empId"
+    as |emp index|
+  >
+    <tr>
+      <td>{{inc index}}</td>
+      <td>{{emp.empId}}</td>
+      <td>{{emp.name}}</td>
+      <td>{{emp.designation}}</td>
+      <td>{{emp.dob}}</td>
+      <td>{{emp.doj}}</td>
+      <td>{{emp.manager}}</td>
+      <td>
+        <LinkTo @route="editEmp" @model={{emp.empId}}>
+          <span class="material-icons editBtn">edit</span>
+        </LinkTo>
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          checked={{if emp.selected "checked" ""}}
+          {{on "click" (fn this.toggleSelect emp)}}
+        />
+      </td>
+    </tr>
+  </VerticalCollection>
+</table>
   </div>
+<br>
+<br>
+
+</div>
