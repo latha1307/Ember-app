@@ -1,5 +1,8 @@
 
-
+{{#if this.showResult.isRunning}}
+  <LoadingSpinner />
+{{/if}}
+{{#if this.show}}
 <h2 class="job-title">Leave Requests</h2>
   <div class="vertical-leave-container">
     {{#if this.leaveRequests.length}}
@@ -19,3 +22,4 @@
       <p>No leave requests found</p>
     {{/if}}
   </div>
+  {{/if}}

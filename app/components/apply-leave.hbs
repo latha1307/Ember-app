@@ -1,3 +1,7 @@
+{{#if this.showResult.isRunning}}
+  <LoadingSpinner />
+{{/if}}
+{{#if this.show}}
 <h1 class="job-title">Apply Leave</h1>
 <div class="apply-leave-card">
     <h1 class="leave-title">Leave Request</h1>
@@ -96,7 +100,7 @@
        
     </div>
      <div class="send-leave-container">
-            <button class="send-button" {{on 'click' this.sendRequest}} {{on "dblclick" this.flashDanger}} {{on 'mouseover' this.flashDouble}}>
+            <button class="send-button" type="button" {{on 'click' this.sendRequest}} {{on "dblclick" this.flashDanger}} {{on 'mouseover' this.flashDouble}}>
                 Send Request<span class="material-icons">send</span>
             </button>
     </div>
@@ -130,3 +134,4 @@
 </div>
 
 </div>
+{{/if}}

@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { empDetails } from '../data/employeeData';
 import { jobPostsData } from '../data/jobPostData';
 import { service } from '@ember/service';
+import { task, timeout } from 'ember-concurrency';
 
 import Employee from '../models/employee';
 
@@ -22,6 +23,22 @@ export default class EmployeesComponent extends Component {
   @tracked doj = '';
   @tracked manager = '';
   @tracked jobPosts = jobPostsData;
+  @tracked show = false;
+
+  constructor() {
+    super(...arguments);
+    this.showResult.perform();
+  }
+
+  @task
+  *showResult() {
+    yield timeout(3000);
+    console.log('finished')
+    this.show = true;
+    console.log(this.show);
+  }
+
+
 
   get filteredEmployees() {
     if (!this.search) return this.employees;  

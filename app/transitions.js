@@ -2,8 +2,8 @@ export default function () {
     this.transition(
       this.fromRoute(''),
       this.toRoute('addEmployee'),
-      this.use('toLeft'),
-      this.reverse('toRight'),
+      this.use('toDown'),
+      this.reverse('toUp'),
     );
 
     this.transition(

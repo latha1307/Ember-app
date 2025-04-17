@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { runTask, cancelTask } from 'ember-lifeline';
 import { inject as service } from '@ember/service';
+import { task, timeout } from 'ember-concurrency';
 
 export default class ApplyLeave extends Component {
   @tracked center = new Date();
@@ -12,6 +13,7 @@ export default class ApplyLeave extends Component {
   @tracked selectedLeave = null;
   @tracked formattedDateRange = '';
   @tracked sendLoading = false;
+  @tracked show = false;
 
   @service flashMessages;
   managers = [
@@ -33,8 +35,19 @@ export default class ApplyLeave extends Component {
     { type: 'Leave Without Pay (LOP)' },
   ];
 
+  constructor() {
+    super(...arguments);
+    this.showResult.perform();
+  }
 
-
+  @task
+  *showResult() {
+    yield timeout(3000);
+    console.log('finished')
+    this.show = true;
+    console.log(this.show);
+  }
+  
   get nextMonthsCenter() {
     return add(this.center, 1, 'month');
   }

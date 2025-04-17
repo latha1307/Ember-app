@@ -94,14 +94,23 @@
 }
 
 .tableDetails table {
-  overflow-y: auto;
   border-collapse: separate;
+  width: 600px;
+  border-spacing: 0 100px;
+  min-width: 1000px; 
+  width: max-content;
   border-spacing: 0;
   background-color: white;
   max-height: 500px;
   width: 100%;
   border-radius: 10px;
   box-shadow: 1px 1px 15px 6px rgb(0 0 0 / 10%);
+}
+.tableDetails th,
+.tableDetails td {
+  padding: 6px 14px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .tableDetails table td{
@@ -119,6 +128,8 @@
 
 .tableDetails thead th {
   position: sticky;
+  white-space: nowrap;
+  padding: 4px 20px ;
   top: 0;
   background-color: chocolate;
   color: white;
@@ -127,6 +138,10 @@
   font-size: larger;
   letter-spacing: 1px;
   text-align: center;
+}
+
+.tableDetails td {
+  white-space: nowrap;
 }
 
 .tableDetails table tr:first-child th:last-child {
@@ -170,6 +185,7 @@
   position: relative;
   width: 100%;
   z-index: 50;
+  text-wrap: no-wrap;
 }
 
 
@@ -238,7 +254,7 @@ input {
 
 
 .manager-label{
-  width: 232px;
+  width: 271px;
 }
 
 .dialog-elem {

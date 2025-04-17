@@ -6,6 +6,7 @@ export const empDetails = [
     dob: '23-06-2000',
     doj: '12-06-2020',
     manager: 'James',
+    skills: ['Java', 'C++', 'Problem Solving']
   },
   {
     empId: 'emp2',
@@ -14,6 +15,7 @@ export const empDetails = [
     dob: '18-12-1999',
     doj: '10-06-2020',
     manager: 'James',
+    skills: ['JavaScript', 'HTML', 'CSS', 'Git']
   },
   {
     empId: 'emp3',
@@ -22,6 +24,7 @@ export const empDetails = [
     dob: '27-06-2002',
     doj: '08-01-2020',
     manager: 'James',
+    skills: ['Troubleshooting', 'Customer Support', 'Linux', 'SQL']
   },
   {
     empId: 'emp4',
@@ -30,6 +33,7 @@ export const empDetails = [
     dob: '12-03-2001',
     doj: '24-12-2020',
     manager: 'James',
+    skills: ['React', ' Node.js', ' MongoDB', ' REST APIs']
   },
   {
     empId: 'emp5',
@@ -38,6 +42,7 @@ export const empDetails = [
     dob: '20-01-2003',
     doj: '01-05-2020',
     manager: 'Ruth',
+    skills: ['Python', ' Data Structures', ' Git']
   },
   {
     empId: 'emp6',
@@ -46,6 +51,7 @@ export const empDetails = [
     dob: '18-09-1998',
     doj: '02-06-2020',
     manager: 'Ruth',
+    skills: ['Node.js', ' Express', ' SQL', ' Docker']
   },
   {
     empId: 'emp7',
@@ -54,5 +60,6 @@ export const empDetails = [
     dob: '01-08-1996',
     doj: '10-08-2020',
     manager: 'Ruth',
+    skills: ['Ember JS', ' JavaScript', ' HTML', ' CSS']
   },
 ];

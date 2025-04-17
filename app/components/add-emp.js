@@ -5,6 +5,7 @@ import { empDetails } from '../data/employeeData';
 import { inject as service } from '@ember/service';
 import { runTask, cancelTask } from 'ember-lifeline';
 import { DateTime } from 'luxon';
+import { task, timeout } from 'ember-concurrency';
 
 export default class AddEmpComponent extends Component {
   @service router;
@@ -18,6 +19,8 @@ export default class AddEmpComponent extends Component {
     { name: 'Eric' },
   ];
 
+  keySkills = ['JavaScript', 'HTML', 'CSS', 'Git', 'Troubleshooting', 'Customer Support', 'Linux', 'SQL','React', ' Node.js', ' MongoDB', ' REST APIs', 'Python', ' Data Structures', ' Git', 'Node.js', ' Express', ' SQL', ' Docker', 'Ember JS', ' JavaScript', ' HTML', ' CSS'];
+
   @tracked isEqualID = null;
   @tracked selectedManager = null;
   @tracked addLoading = false;
@@ -26,6 +29,8 @@ export default class AddEmpComponent extends Component {
   @tracked designation = '';
   @tracked dob = '';
   @tracked doj = '';
+  @tracked skills = '';
+  @tracked show = false;
 
   @tracked selectedDate = null;
   @tracked selectedDojDate = null;
@@ -36,6 +41,12 @@ export default class AddEmpComponent extends Component {
   @action prevent(e) {
     return e.stopImmediatePropagation();
   }
+
+  constructor() {
+    super(...arguments);
+    this.showResult.perform();
+  }
+  
 
   months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
@@ -124,6 +135,15 @@ export default class AddEmpComponent extends Component {
     this.showDojCalendar = true;
   }
 
+  @task
+  *showResult() {
+    yield timeout(3000);
+    console.log('finished')
+    this.show = true;
+    console.log(this.show);
+  }
+
+
   @action
   selectDob(selected) {
     const selectedLuxon = selected.date?.toFormat ? selected.date : DateTime.fromJSDate(selected.date);
@@ -143,6 +163,10 @@ export default class AddEmpComponent extends Component {
 
   @action setName(e) {
     this.name = e.target.value;
+  }
+
+  @action setSkills(e) {
+    this.skills = e.target.value;
   }
 
   @action setEmpId(e) {
@@ -218,6 +242,7 @@ export default class AddEmpComponent extends Component {
           name: this.name,
           empId: this.empId,
           designation: this.designation,
+          skills: this.skills,
           dob: this.dob,
           doj: this.doj,
           manager: this.selectedManager?.name || 'Not Assigned',
@@ -254,6 +279,7 @@ export default class AddEmpComponent extends Component {
       this.designation = '';
       this.dob = '';
       this.doj = '';
+      this.skills = '';
       this.selectedManager = null;
     }, 3000)
   }

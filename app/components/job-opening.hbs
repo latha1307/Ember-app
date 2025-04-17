@@ -1,4 +1,8 @@
-    <h2 class="job-title">Job Openings</h2>
+{{#if this.showResult.isRunning}}
+  <LoadingSpinner />
+{{/if}}
+{{#if this.show}}
+  <h2 class="job-title">Job Openings</h2>
   <div class="vertical-collection-container">
     {{#if this.jobPosts.length}}
         <VerticalCollection
@@ -18,3 +22,4 @@
       <p>No job posts found</p>
     {{/if}}
   </div>
+{{/if}}

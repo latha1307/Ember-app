@@ -1,3 +1,7 @@
+{{#if this.showResult.isRunning}}
+  <LoadingSpinner />
+{{/if}}
+{{#if this.show}}
   <h1 class="header">Employee Details</h1>
 
   <div class="buttons-container" >
@@ -32,6 +36,7 @@
       <th>Employee ID</th>
       <th>Employee Name</th>
       <th>Designation</th>
+      <th>Key Skills</th>
       <th>DOB</th>
       <th>Date Of Joining</th>
       <th>Manager</th>
@@ -54,6 +59,7 @@
       <td>{{emp.empId}}</td>
       <td>{{emp.name}}</td>
       <td>{{emp.designation}}</td>
+      <td>{{emp.skills}}</td>
       <td>{{emp.dob}}</td>
       <td>{{emp.doj}}</td>
       <td>{{emp.manager}}</td>
@@ -77,3 +83,4 @@
 <br>
 
 </div>
+{{/if}}

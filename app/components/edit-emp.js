@@ -5,6 +5,7 @@ import { empDetails } from '../data/employeeData';
 import { inject as service } from '@ember/service';
 import { runTask, cancelTask } from 'ember-lifeline';
 import { DateTime } from 'luxon';
+import { task, timeout } from 'ember-concurrency';
 
 export default class EditEmpComponent extends Component {
   managers = [
@@ -14,6 +15,9 @@ export default class EditEmpComponent extends Component {
       { name: 'Tina' },
       { name: 'Eric' },
     ];
+  keySkills = ['JavaScript', 'HTML', 'CSS', 'Git', 'Troubleshooting', 'Customer Support', 'Linux', 'SQL','React', ' Node.js', ' MongoDB', ' REST APIs', 'Python', ' Data Structures', ' Git', 'Node.js', ' Express', ' SQL', ' Docker', 'Ember JS', ' JavaScript', ' HTML', ' CSS'];
+  
+
   @tracked isEqualID = null;
   @tracked updateLoading = false;
   @tracked selectedManager = null;
@@ -26,12 +30,15 @@ export default class EditEmpComponent extends Component {
   @service router;
   @service flashMessages;
   @tracked name = '';
+  @tracked skills = '';
   @tracked empId = '';
   @tracked designation = '';
   @tracked dob = '';
   @tracked doj = '';
   @tracked manager = '';
   @tracked editingEmp = null;
+  @tracked show = false;
+
 
   prevent(e) {
     return e.stopImmediatePropagation();
@@ -84,6 +91,7 @@ export default class EditEmpComponent extends Component {
 
   constructor() {
     super(...arguments);
+    this.showResult.perform();
     this.editingEmp = this.args.editingEmp;
 
     if (this.editingEmp) {
@@ -92,6 +100,7 @@ export default class EditEmpComponent extends Component {
       this.designation = this.editingEmp.designation;
       this.dob = this.editingEmp.dob;
       this.doj = this.editingEmp.doj;
+      this.skills = this.editingEmp.skills;
       this.selectedDate = this.editingEmp.doj;
       this.selectedManager = this.managers.find(
         (m) => m.name === this.editingEmp.manager
@@ -101,6 +110,14 @@ export default class EditEmpComponent extends Component {
     }
   }
 
+  
+    @task
+    *showResult() {
+      yield timeout(3000);
+      console.log('finished')
+      this.show = true;
+      console.log(this.show);
+    }
   
 
   @action
@@ -202,6 +219,10 @@ export default class EditEmpComponent extends Component {
     this.name = e.target.value;
   }
 
+  @action setSkills(e) {
+    this.skills = e.target.value;
+  }
+
   @action setEmpId(e) {
     this.empId = e.target.value;
   }
@@ -250,6 +271,7 @@ export default class EditEmpComponent extends Component {
       this.editingEmp.name = this.name;
     this.editingEmp.empId = this.empId;
     this.editingEmp.designation = this.designation;
+    this.editingEmp.skills = this.skills
     this.editingEmp.dob = this.dob;
     this.editingEmp.doj = this.doj;
     this.editingEmp.manager = this.selectedManager?.name || this.manager;
@@ -278,6 +300,7 @@ export default class EditEmpComponent extends Component {
       this.name = '';
       this.empId = '';
       this.designation = '';
+      this.skills = '';
       this.dob = '';
       this.doj = '';
       this.manager = '';

@@ -1,10 +1,14 @@
+{{#if this.showResult.isRunning}}
+  <LoadingSpinner />
+{{/if}}
+{{#if this.show}}
 <div class="main-container">
   <div class="card-container">
   <div class="dialog-head">
     <div {{on 'click' this.Back}}><span class="material-icons"> arrow_back</span></div>
     <h2>Update Employee Details</h2>
   </div>
-  <form {{on "submit" this.EditEmployee}} {{on-click-outside this.closeCalendar}} {{on-key 'ctrl+s' this.EditEmployee}}>
+  <form {{on "submit" this.EditEmployee}} {{on-click-outside this.closeCalendar eventType="mouseover" exceptSelector=".card-container"}} {{on-key 'ctrl+s' this.EditEmployee}}>
     <div class="dialog-elem">
       <label>Employee Name:</label>
       <input type="text" value={{this.name}} {{on "input" this.setName}} />
@@ -22,6 +26,19 @@
       <label>Designation:</label>
       <input type="text" value={{this.designation}} {{on "input" this.setDesignation}} />
     </div>
+
+    <div class="dialog-elem">
+      <label class="key-skill-label">Key skills:</label>
+      <PowerSelectMultiple
+        class="power-select-multiple-input"
+        @searchEnabled={{true}}
+        @options={{this.keySkills}}
+        @selected={{this.skills}}
+        @placeholder="Type your skills..."
+        @onChange={{fn (mut this.skills)}} as |name|>
+          {{name}}
+      </PowerSelectMultiple>
+    </div>
 <div class="dialog-elem">
   <label>DOB:</label>
   <div class="dob-custom">
@@ -33,7 +50,7 @@
       {{on "click" this.triggerDobPicker}}
     />
 
-    <span class="material-icons calender-icon" {{on "click" this.triggerDobPicker}}>
+    <span class="material-icons calender-icon" {{on "mouseover" this.triggerDobPicker}}>
       calendar_month
     </span>
 
@@ -66,7 +83,7 @@
       {{on "click" this.triggerDojPicker}}
     />
 
-    <span class="material-icons calender-icon" {{on "click" this.triggerDojPicker}}>
+    <span class="material-icons calender-icon" {{on "mouseover" this.triggerDojPicker}}>
       calendar_month
     </span>
 
@@ -89,8 +106,13 @@
 
     <div class="dialog-elem">
     <label class="manager-label">Manager:</label>
-
-        <BasicDropdown as |dd|>   
+    <PowerSelect class="power-select-input" 
+      @selected={{this.selectedManager}} 
+      @options={{this.managers}} 
+      @onChange={{this.selectManager}} as |manager|>
+      {{manager.name}}
+    </PowerSelect>
+        {{!-- <BasicDropdown as |dd|>   
         <dd.Trigger
         class="trigger-bootstrap-feel"
         {{on 'mousedown' this.prevent}}
@@ -113,7 +135,7 @@
         </p>
       {{/each}}
     </dd.Content>
-  </BasicDropdown>
+  </BasicDropdown> --}}
 
 
     </div>
@@ -139,7 +161,7 @@
       <div class="alert-progress">
         <h3 style="margin-left: 10px;color:green;">{{component.flashType}}</h3>
         <p style="margin-left: 10px;">{{flash.message}}</p>
-        <div class="alert-progressBar" style="{{component.progressDuration}}">
+        <div class="alert-progressBar" style="background-color:green">
           
         </div>
       </div>
@@ -147,3 +169,4 @@
   </FlashMessage>
 {{/each}}
 </div>
+{{/if}}
