@@ -15,15 +15,21 @@ export default class EmployeesComponent extends Component {
   @tracked selected = false;
   @tracked editingEmp = null;
   @service router;
+  @tracked showCustomize = false;
 
-  @tracked name = '';
-  @tracked empId = '';
-  @tracked designation = '';
-  @tracked dob = '';
-  @tracked doj = '';
-  @tracked manager = '';
+
   @tracked jobPosts = jobPostsData;
   @tracked show = false;
+
+  @tracked columns = [
+    { column: 'Employee ID', valuePath: 'empId', isVisible: true},
+    { column: 'Employee Name', valuePath: 'name', isVisible: true},
+    { column: 'Designation', valuePath: 'designation', isVisible: true},
+    { column: 'Key Skills', valuePath: 'skills', isVisible: true},
+    { column: 'DOB', valuePath: 'dob', isVisible: true},
+    { column: 'Date of Joining', valuePath: 'doj', isVisible: true},
+    { column: 'Manager', valuePath: 'manager', isVisible: true},
+  ]
 
   constructor() {
     super(...arguments);
@@ -104,6 +110,33 @@ export default class EmployeesComponent extends Component {
       this.jobPosts = [...repeatAboveJobs, ...this.jobPosts]
     }
 
+  
+  @action
+  toggleCustomize() {
+    this.showCustomize = !this.showCustomize;
+  }
+
+  @action
+  closeCustomize() {
+    if (this.showCustomize) {
+      this.showCustomize = false;
+    }
+  }
+
+  @action
+  toggleColumn(index) {
+    let newColumns = this.columns.slice();
+    newColumns[index] = {
+      ...newColumns[index],
+      isVisible: !newColumns[index].isVisible,
+    };
+    this.columns = newColumns;
+  }
+
+  @action
+  updateColumns() {
+    console.log('Updated Columns: ', this.columns)
+  }
 
 
   @action toggleSelect(emp) {
@@ -125,12 +158,5 @@ export default class EmployeesComponent extends Component {
     this.employees = this.employees.filter((e) => !e.selected);
   }
 
-  resetForm() {
-    this.name = '';
-    this.empId = '';
-    this.designation = '';
-    this.dob = '';
-    this.doj = '';
-    this.manager = '';
-  }
+
 }

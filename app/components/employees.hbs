@@ -17,12 +17,26 @@
           <i class="material-icons" style="font-size:18px;color:white">delete</i> Delete Employee
         </button>
         </div>
+        <div class="customize-container">
+          <button class="customize" {{on 'mouseover' this.toggleCustomize}}>
+            <i class="material-icons" style="font-size:18px;color:white">build</i> Customize column
+          </button>
+          {{#if this.showCustomize}}
+  <div class="dropdown-menu" {{on-click-outside this.closeCustomize eventType='mouseover'}}>
+    <h3>Show Columns</h3>
+    {{#each this.columns as |col index|}}
+      <label>
+        <input type="checkbox" checked={{col.isVisible}} {{on 'change' (fn this.toggleColumn index)}} > {{col.column}} </label>
+    {{/each}}
+  </div>
+{{/if}}
+        </div>
+        
       </div>
-
+  
       <div class="search-container">
         <input type="search" id="search" placeholder="Search..." {{on "input" this.updateSearch}} />
         <span class="material-icons">search</span>
-
       </div>
     </div>
   </div>
@@ -33,13 +47,11 @@
   <thead class="table-header">
     <tr>
       <th>S.No</th>
-      <th>Employee ID</th>
-      <th>Employee Name</th>
-      <th>Designation</th>
-      <th>Key Skills</th>
-      <th>DOB</th>
-      <th>Date Of Joining</th>
-      <th>Manager</th>
+      {{#each this.columns as |col|}}
+        {{#if col.isVisible}}
+          <th>{{col.column}}</th>
+        {{/if}}
+      {{/each}}
       <th>Actions</th>
       <th><input type="checkbox" {{on "change" this.selectAll}}> Select All</th>
     </tr>
@@ -56,13 +68,11 @@
   >
     <tr>
       <td>{{inc index}}</td>
-      <td>{{emp.empId}}</td>
-      <td>{{emp.name}}</td>
-      <td>{{emp.designation}}</td>
-      <td>{{emp.skills}}</td>
-      <td>{{emp.dob}}</td>
-      <td>{{emp.doj}}</td>
-      <td>{{emp.manager}}</td>
+      {{#each this.columns as |col|}}
+        {{#if col.isVisible}}
+          <td>{{get-value emp col.valuePath}}</td>
+        {{/if}}
+      {{/each}}
       <td>
         <LinkTo @route="editEmp" @model={{emp.empId}}>
           <span class="material-icons editBtn">edit</span>
@@ -81,6 +91,8 @@
   </div>
 <br>
 <br>
+
+
 
 </div>
 {{/if}}

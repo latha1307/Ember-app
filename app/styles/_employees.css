@@ -37,6 +37,11 @@
   transform: scale(1.05);
 }
 
+.customize:hover {
+  background-color: rgb(12, 74, 18);
+  transform: scale(1.05);
+}
+
 .material-icons{
   background-color: inherit;
 }
@@ -58,6 +63,25 @@
   font-size: 16px;
   letter-spacing: 1px;
 }
+
+.customize {
+  border-style: none;
+  box-shadow: rgb(149 157 165 / 20%) 0 8px 24px;
+  background-color: rgb(11, 93, 25);
+  border-radius: 100px;
+  color: white;
+  gap: 2px;
+  cursor: pointer;
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+  padding: 12px 20px;
+  text-align: center;
+  transition: all 250ms;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
 
 .plus {
   font-size: 18px;
@@ -410,4 +434,36 @@ input {
 
 .dialog-elemId label{
   font-size: 18px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  gap: 10px;
+  width: 200px;
+  z-index: 60;
+}
+
+.customize-container{
+  position: relative;
+}
+
+.dropdown-menu label{
+  font-weight: 400;
+}
+
+.dropdown-menu button{
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  background-color: #1665dc;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
 }
